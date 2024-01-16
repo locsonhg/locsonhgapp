@@ -29,38 +29,35 @@ class MyWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.black.withOpacity(0.5),
               ),
-              child: Column(
-                children: [
-                  Expanded(
-                      child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: NetworkImage(movie.movie!.posterUrl!),
-                          fit: BoxFit.cover,
-                          colorFilter: ColorFilter.mode(
-                              Colors.black.withOpacity(0.2),
-                              BlendMode.hardLight),
-                        )),
-                  )),
-                ],
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                    image: NetworkImage(movie.movie!.posterUrl!),
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.2), BlendMode.hardLight),
+                  ),
+                ),
               ),
             ),
             Positioned(
               bottom: 10,
               left: 10,
-              child: Text("${movie.movie!.name}",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    overflow: TextOverflow.fade,
-                  ),
-                  maxLines: 2,
-                  textAlign: TextAlign.left,
-                  textDirection: TextDirection.ltr,
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: true),
+              child: Text(
+                "${movie.movie!.name}",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  overflow: TextOverflow.fade,
+                ),
+                maxLines: 2,
+                textAlign: TextAlign.left,
+                textDirection: TextDirection.ltr,
+                overflow: TextOverflow.ellipsis,
+                softWrap: true,
+              ),
             ),
             Positioned(
               top: 5,
@@ -83,19 +80,13 @@ class MyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: Column(
-      children: [
-        Expanded(
-          child: GridView(
-            children: [...buildMovies(context)],
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 400,
-                childAspectRatio: 3 / 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10),
-          ),
-        ),
-      ],
+        child: GridView(
+      children: [...buildMovies(context)],
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 400,
+          childAspectRatio: 3 / 2,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10),
     ));
   }
 }

@@ -16,9 +16,9 @@ void main() {
     initialRoute: "/",
     routes: {
       "/screenMovie": (context) => screenMovie(),
-      "/playVideo": (context) => playVideo(),
+      "/playVideo": (context) => const playVideo(),
     },
-    home: MyHomePage(),
+    home: const MyHomePage(),
   ));
 }
 
@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text("Danh sách phim"),
         actions: [
           Text("Tổng số trang: ${fetchApi().totalPage}"),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
         ],
@@ -81,46 +81,51 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             sliderCarousel(movies: _movies),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
               children: [
-                Expanded(
+                const Expanded(
                     child: Text(
                   "Phim mới nhất",
                   style: TextStyle(fontSize: 20),
                 )),
                 Expanded(
-                    child: Container(
-                  padding: EdgeInsets.only(left: 10, right: 10),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: DropdownButton<String>(
-                    borderRadius: BorderRadius.circular(10),
-                    hint: Text("Chọn trang"),
-                    isExpanded: true,
-                    value: _selectedPage,
-                    items: _listPage.map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text('Trang $value'),
-                      );
-                    }).toList(),
-                    onChanged: (String? value) {
-                      // Handle onChanged event
-                      setState(() {
-                        _selectedPage = value!;
-                        _movies = [];
-                      });
-                      handleChoosePage(value!);
-                    },
+                  child: Container(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: DropdownButton<String>(
+                      borderRadius: BorderRadius.circular(10),
+                      hint: const Text("Chọn trang"),
+                      isExpanded: true,
+                      value: _selectedPage,
+                      items: _listPage.map(
+                        (String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text('Trang $value'),
+                          );
+                        },
+                      ).toList(),
+                      onChanged: (String? value) {
+                        // Handle onChanged event
+                        setState(
+                          () {
+                            _selectedPage = value!;
+                            _movies = [];
+                          },
+                        );
+                        handleChoosePage(value!);
+                      },
+                    ),
                   ),
-                ))
+                )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             MyWidget(movies: _movies)
